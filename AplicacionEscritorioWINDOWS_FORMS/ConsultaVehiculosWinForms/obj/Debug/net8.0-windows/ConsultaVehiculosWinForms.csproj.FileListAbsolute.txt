@@ -1,0 +1,17 @@
+C:\soaproyectos\escritorio\ConsultaVehiculosWinForms\bin\Debug\net8.0-windows\ConsultaVehiculosWinForms.exe
+C:\soaproyectos\escritorio\ConsultaVehiculosWinForms\bin\Debug\net8.0-windows\ConsultaVehiculosWinForms.deps.json
+C:\soaproyectos\escritorio\ConsultaVehiculosWinForms\bin\Debug\net8.0-windows\ConsultaVehiculosWinForms.runtimeconfig.json
+C:\soaproyectos\escritorio\ConsultaVehiculosWinForms\bin\Debug\net8.0-windows\ConsultaVehiculosWinForms.dll
+C:\soaproyectos\escritorio\ConsultaVehiculosWinForms\bin\Debug\net8.0-windows\ConsultaVehiculosWinForms.pdb
+C:\soaproyectos\escritorio\ConsultaVehiculosWinForms\obj\Debug\net8.0-windows\ConsultaVehiculosWinForms.FormPrincipal.resources
+C:\soaproyectos\escritorio\ConsultaVehiculosWinForms\obj\Debug\net8.0-windows\ConsultaVehiculosWinForms.csproj.GenerateResource.cache
+C:\soaproyectos\escritorio\ConsultaVehiculosWinForms\obj\Debug\net8.0-windows\ConsultaVehiculosWinForms.GeneratedMSBuildEditorConfig.editorconfig
+C:\soaproyectos\escritorio\ConsultaVehiculosWinForms\obj\Debug\net8.0-windows\ConsultaVehiculosWinForms.AssemblyInfoInputs.cache
+C:\soaproyectos\escritorio\ConsultaVehiculosWinForms\obj\Debug\net8.0-windows\ConsultaVehiculosWinForms.AssemblyInfo.cs
+C:\soaproyectos\escritorio\ConsultaVehiculosWinForms\obj\Debug\net8.0-windows\ConsultaVehiculosWinForms.csproj.CoreCompileInputs.cache
+C:\soaproyectos\escritorio\ConsultaVehiculosWinForms\obj\Debug\net8.0-windows\ConsultaVehiculosWinForms.dll
+C:\soaproyectos\escritorio\ConsultaVehiculosWinForms\obj\Debug\net8.0-windows\refint\ConsultaVehiculosWinForms.dll
+C:\soaproyectos\escritorio\ConsultaVehiculosWinForms\obj\Debug\net8.0-windows\ConsultaVehiculosWinForms.pdb
+C:\soaproyectos\escritorio\ConsultaVehiculosWinForms\obj\Debug\net8.0-windows\ConsultaVehiculosWinForms.genruntimeconfig.cache
+C:\soaproyectos\escritorio\ConsultaVehiculosWinForms\obj\Debug\net8.0-windows\ref\ConsultaVehiculosWinForms.dll
+C:\soaproyectos\escritorio\ConsultaVehiculosWinForms\obj\Debug\net8.0-windows\Consulta.1624DF44.Up2Date

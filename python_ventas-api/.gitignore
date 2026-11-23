@@ -1,0 +1,14 @@
+# Entorno local y credenciales
+.venv/
+.env
+
+# Archivos generados por Python y herramientas
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Editores locales
+.vscode/
+.idea/

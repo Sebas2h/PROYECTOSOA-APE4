@@ -1,0 +1,4 @@
+# Instala primero todas las dependencias de ejecución.
+-r requirements.txt
+# Herramienta utilizada para ejecutar las pruebas de integración simulada.
+pytest>=8,<10
