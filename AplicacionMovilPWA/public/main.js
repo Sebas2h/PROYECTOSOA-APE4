@@ -1,141 +1,121 @@
-import { listarVehiculos } from './api.js';
+import { login, listarVehiculos, listarCompradores, crearComprador, crearVenta } from './api.js';
 
-// Referencias a los controles de la interfaz móvil.
-const formulario = document.querySelector('#formulario');
-const campoToken = document.querySelector('#jwt');
-const botonConsultar = document.querySelector('#consultar');
-const botonBorrar = document.querySelector('#borrar');
-const botonMostrar = document.querySelector('#alternarToken');
-const mensaje = document.querySelector('#mensaje');
-const contenedor = document.querySelector('#vehiculos');
-const contador = document.querySelector('#contador');
-const conexion = document.querySelector('#conexion');
+const $ = (s) => document.querySelector(s);
+const estado = { token: sessionStorage.getItem('ape04.jwt') || '', vehiculos: [], compradores: [] };
+const mensaje = (texto, tipo = 'neutro') => { $('#mensaje').textContent = texto; $('#mensaje').className = `mensaje ${tipo}`; };
+const texto = (v) => v ?? '—';
 
-const moneda = new Intl.NumberFormat('es-EC', { style: 'currency', currency: 'USD' });
-
-function mostrarMensaje(texto, tipo = 'neutro') {
-  mensaje.textContent = texto;
-  mensaje.className = `mensaje ${tipo}`;
-}
-
-function limpiarListado() {
-  contenedor.replaceChildren();
-  contador.textContent = '0 vehículos';
-}
-
-function crearElemento(etiqueta, clase, contenido) {
-  const elemento = document.createElement(etiqueta);
-  if (clase) elemento.className = clase;
-  // textContent impide interpretar HTML que pudiera venir de la API.
-  if (contenido !== undefined) elemento.textContent = String(contenido);
-  return elemento;
-}
-
-function texto(valor) {
-  return valor === null || valor === undefined || valor === '' ? '—' : String(valor);
-}
-
-function precio(valor) {
-  if (valor === null || valor === undefined || valor === '') return '—';
-  const numero = Number(valor);
-  return Number.isFinite(numero) ? moneda.format(numero) : texto(valor);
-}
-
-function agregarDato(grilla, etiqueta, valor, extra = '') {
-  const grupo = crearElemento('div', extra);
-  grupo.append(
-    crearElemento('span', 'dato-etiqueta', etiqueta),
-    crearElemento('span', 'dato-valor', valor),
-  );
-  grilla.append(grupo);
-}
-
-function pintarListado(vehiculos) {
-  limpiarListado();
-  contador.textContent = `${vehiculos.length} vehículo${vehiculos.length === 1 ? '' : 's'}`;
-
-  if (vehiculos.length === 0) {
-    contenedor.append(crearElemento('p', 'vacio', 'HTTP 200: no hay vehículos registrados.'));
-    return;
-  }
-
-  // Se crea una tarjeta adaptable al tamaño de un teléfono por cada registro.
-  for (const vehiculo of vehiculos) {
-    const tarjeta = crearElemento('article', 'vehiculo');
-    const cabecera = crearElemento('div', 'vehiculo-cabecera');
-    const encabezado = crearElemento('div');
-    encabezado.append(
-      crearElemento('h3', 'vehiculo-titulo', `${texto(vehiculo.marca)} ${texto(vehiculo.modelo)}`),
-      crearElemento('span', 'vehiculo-id', `ID: ${texto(vehiculo.idVehiculo ?? vehiculo.id)}`),
-    );
-
-    const estado = texto(vehiculo.estado);
-    const claseEstado = String(estado).toUpperCase() === 'DISPONIBLE' ? 'disponible'
-      : String(estado).toUpperCase() === 'VENDIDO' ? 'vendido' : '';
-    cabecera.append(encabezado, crearElemento('span', `estado ${claseEstado}`, estado));
-
-    const grilla = crearElemento('div', 'datos');
-    agregarDato(grilla, 'Placa', texto(vehiculo.placa));
-    agregarDato(grilla, 'Año', texto(vehiculo.anio));
-    agregarDato(grilla, 'Color', texto(vehiculo.color));
-    agregarDato(grilla, 'Precio', precio(vehiculo.precio), 'dato-precio');
-    tarjeta.append(cabecera, grilla);
+function pintarVehiculos() {
+  const contenedor = $('#vehiculos'); contenedor.replaceChildren();
+  $('#contador').textContent = `${estado.vehiculos.length} vehículo(s)`;
+  $('#vehiculoId').replaceChildren(new Option('Seleccione…', ''));
+  for (const v of estado.vehiculos) {
+    const id = v.idVehiculo ?? v.id;
+    const tarjeta = document.createElement('article'); tarjeta.className = 'vehiculo';
+    tarjeta.innerHTML = '<div class="vehiculo-cabecera"><div><h3 class="vehiculo-titulo"></h3><span class="vehiculo-id"></span></div><span class="estado"></span></div><div class="datos"></div>';
+    tarjeta.querySelector('h3').textContent = `${texto(v.marca)} ${texto(v.modelo)}`;
+    tarjeta.querySelector('.vehiculo-id').textContent = `ID: ${id}`;
+    tarjeta.querySelector('.estado').textContent = texto(v.estado);
+    tarjeta.querySelector('.datos').textContent = `Placa ${texto(v.placa)} · Precio $${texto(v.precio)}`;
     contenedor.append(tarjeta);
+    if (String(v.estado).toUpperCase() === 'DISPONIBLE') $('#vehiculoId').add(new Option(`${id} · ${v.marca} ${v.modelo}`, id));
   }
+  if (!estado.vehiculos.length) contenedor.textContent = 'No hay vehículos registrados.';
 }
 
-formulario.addEventListener('submit', async (evento) => {
-  evento.preventDefault();
-  botonConsultar.disabled = true;
-  botonBorrar.disabled = true;
-  limpiarListado();
-  mostrarMensaje('Consultando vehículos…');
+function pintarCompradores() {
+  const select = $('#compradorId'); select.replaceChildren(new Option('Seleccione…', ''));
+  for (const c of estado.compradores) select.add(new Option(`${c.id} · ${c.nombre}`, c.id));
+}
 
+function mostrarVista(nombre) {
+  $('#loginPanel').classList.add('oculto');
+  $('#menuWrap').classList.remove('oculto');
+  $('#dashboard').classList.toggle('oculto', nombre !== 'dashboard');
+  $('#vistaCatalogo').classList.toggle('oculto', nombre !== 'catalogo');
+  $('#vistaCompradores').classList.toggle('oculto', nombre !== 'compradores');
+  $('#vistaVentas').classList.toggle('oculto', nombre !== 'ventas');
+  $('#menuOpciones').classList.add('oculto');
+  $('#menuBtn').setAttribute('aria-expanded', 'false');
+}
+
+function actualizarResumen() {
+  $('#resumenVehiculos').textContent = estado.vehiculos.filter(v => String(v.estado).toUpperCase() === 'DISPONIBLE').length;
+  $('#resumenCompradores').textContent = estado.compradores.length;
+}
+
+function activarDashboard() {
+  $('#loginPanel').classList.add('oculto');
+  $('#menuWrap').classList.remove('oculto');
+  $('#dashboard').classList.remove('oculto');
+  $('#saludo').textContent = `Bienvenido, ${$('#usuario').value || 'operador'}`;
+  mostrarVista('dashboard');
+  actualizarResumen();
+}
+
+async function refrescar() {
+  if (!estado.token) throw new Error('Primero inicie sesión.');
+  const [v, c] = await Promise.all([listarVehiculos(estado.token), listarCompradores(estado.token)]);
+  estado.vehiculos = v.vehiculos; estado.compradores = c; pintarVehiculos(); pintarCompradores(); actualizarResumen();
+}
+
+$('#loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault(); $('#loginBtn').disabled = true;
   try {
-    const respuesta = await listarVehiculos(campoToken.value);
-    pintarListado(respuesta.vehiculos);
-    mostrarMensaje(`HTTP ${respuesta.codigoHttp}: ${respuesta.vehiculos.length} vehículo(s) consultado(s).`, 'exito');
-  } catch (error) {
-    // Ante fallos se mantienen vacíos los resultados; nunca se inventan datos.
-    mostrarMensaje(error.message, 'error');
-    contador.textContent = '0 vehículos';
-    contenedor.append(crearElemento('p', 'vacio', 'No hay datos disponibles para mostrar.'));
-  } finally {
-    botonConsultar.disabled = false;
-    botonBorrar.disabled = false;
-  }
+    estado.token = await login({ usuario: $('#usuario').value, clave: $('#clave').value,
+      cliente: $('#cliente').value, secreto: $('#secreto').value });
+    sessionStorage.setItem('ape04.jwt', estado.token); $('#clave').value = ''; $('#secreto').value = '';
+    activarDashboard();
+    refrescar().catch((ex) => mensaje(`Sesión iniciada; no se pudieron cargar los datos: ${ex.message}`, 'error'));
+    mensaje('Sesión iniciada. Bienvenido.', 'exito');
+  } catch (ex) { estado.token = ''; sessionStorage.removeItem('ape04.jwt'); mensaje(ex.message, 'error'); }
+  finally { $('#loginBtn').disabled = false; }
 });
 
-botonMostrar.addEventListener('click', () => {
-  const revelar = campoToken.type === 'password';
-  campoToken.type = revelar ? 'text' : 'password';
-  botonMostrar.textContent = revelar ? 'Ocultar' : 'Mostrar';
-  botonMostrar.setAttribute('aria-pressed', String(revelar));
-  botonMostrar.setAttribute('aria-label', revelar ? 'Ocultar token' : 'Mostrar token');
+$('#logout').addEventListener('click', () => {
+  estado.token = ''; sessionStorage.removeItem('ape04.jwt'); estado.vehiculos = []; estado.compradores = [];
+  pintarVehiculos(); pintarCompradores(); $('#menuWrap').classList.add('oculto'); $('#dashboard').classList.add('oculto'); $('#loginPanel').classList.remove('oculto');
+  $('#clave').value = ''; $('#secreto').value = ''; $('#menuOpciones').classList.add('oculto');
+  $('#loginPanel').classList.remove('oculto');
+  mostrarVista('login'); actualizarResumen(); mensaje('Sesión cerrada.');
+});
+$('#salirBtn').addEventListener('click', () => $('#logout').click());
+$('#menuBtn').addEventListener('click', () => {
+  const opciones = $('#menuOpciones'); opciones.classList.toggle('oculto');
+  $('#menuBtn').setAttribute('aria-expanded', String(!opciones.classList.contains('oculto')));
+});
+document.querySelectorAll('[data-vista]').forEach(boton => boton.addEventListener('click', () => mostrarVista(boton.dataset.vista)));
+$('#actualizar').addEventListener('click', async () => {
+  try { await refrescar(); mensaje('Catálogo actualizado.', 'exito'); } catch (ex) { mensaje(ex.message, 'error'); }
+});
+$('#compradorForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  try {
+    if (!estado.token) throw new Error('Inicia sesión para continuar.');
+    await crearComprador(estado.token, { documento: $('#documento').value, nombre: $('#nombre').value, correo: $('#correo').value });
+    await refrescar(); e.target.reset(); mensaje('Comprador creado.', 'exito');
+  } catch (ex) { mensaje(ex.message, 'error'); }
+});
+$('#ventaForm').addEventListener('submit', async (e) => {
+  e.preventDefault(); const boton = $('#vender'); boton.disabled = true;
+  const clave = $('#idempotencia').value || crypto.randomUUID().replaceAll('-', '');
+  $('#idempotencia').value = clave;
+  try {
+    if (!estado.token) throw new Error('Inicia sesión para continuar.');
+    const venta = await crearVenta(estado.token, { vehiculoId: Number($('#vehiculoId').value), compradorId: Number($('#compradorId').value) }, clave);
+    await refrescar(); mensaje(`Venta ${venta.id}: ${venta.estado}; notificación ${venta.notificacion}.`, 'exito');
+  } catch (ex) { mensaje(`Venta no completada: ${ex.message}. Reintente con la misma clave.`, 'error'); }
+  finally { boton.disabled = false; }
 });
 
-botonBorrar.addEventListener('click', () => {
-  campoToken.value = '';
-  campoToken.type = 'password';
-  botonMostrar.textContent = 'Mostrar';
-  botonMostrar.setAttribute('aria-pressed', 'false');
-  botonMostrar.setAttribute('aria-label', 'Mostrar token');
-  mostrarMensaje('Token borrado del formulario.');
-  campoToken.focus();
+$('#conexion').textContent = navigator.onLine ? 'Navegador conectado' : 'Sin conexión';
+if (estado.token) refrescar().then(activarDashboard).catch(() => {
+  estado.token = ''; sessionStorage.removeItem('ape04.jwt');
+  $('#loginPanel').classList.remove('oculto'); $('#dashboard').classList.add('oculto'); $('#menuWrap').classList.add('oculto');
+  mensaje('La sesión venció o no se pudo validar. Inicia sesión nuevamente.', 'error');
 });
-
-function actualizarConexion() {
-  conexion.textContent = navigator.onLine ? 'Navegador conectado' : 'Sin conexión de red';
+else {
+  $('#loginPanel').classList.remove('oculto'); $('#dashboard').classList.add('oculto'); $('#menuWrap').classList.add('oculto');
+  $('#vistaCatalogo').classList.add('oculto'); $('#vistaCompradores').classList.add('oculto'); $('#vistaVentas').classList.add('oculto');
 }
-window.addEventListener('online', actualizarConexion);
-window.addEventListener('offline', actualizarConexion);
-actualizarConexion();
-
-// El Service Worker conserva únicamente recursos visuales, nunca el JWT ni /api.
-if ('serviceWorker' in navigator && window.isSecureContext) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch(() => {
-      // La consulta REST sigue funcionando aunque no se instale el modo PWA.
-    });
-  });
-}
+if ('serviceWorker' in navigator && window.isSecureContext) navigator.serviceWorker.register('/sw.js').catch(() => {});

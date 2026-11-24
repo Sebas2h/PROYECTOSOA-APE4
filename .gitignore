@@ -1,0 +1,23 @@
+# Configuración local y secretos
+.env
+**/.env
+!.env.example
+!**/.env.example
+
+# Salidas de construcción
+**/target/
+**/bin/
+**/obj/
+**/dist/
+**/node_modules/
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+
+# Ejecución local
+*.log
+*.pid
+infraestructura/nginx/logs/
+infraestructura/nginx/temp/
+.runtime/
+

@@ -19,6 +19,11 @@ public class NotificacionKeyFilter extends OncePerRequestFilter{
         this.key=key;
     }
      @Override
+ protected boolean shouldNotFilter(HttpServletRequest request) {
+    return request.getRequestURI().startsWith("/actuator/health");
+ }
+
+ @Override
     protected void doFilterInternal(HttpServletRequest req,
     HttpServletResponse res, FilterChain chain)
     throws IOException, ServletException {
@@ -41,4 +46,4 @@ public class NotificacionKeyFilter extends OncePerRequestFilter{
 
  }
 
-} 
+}

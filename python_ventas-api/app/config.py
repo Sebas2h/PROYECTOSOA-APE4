@@ -28,6 +28,14 @@ SERVICE_KEY = requerido("VENTAS_SERVICE_KEY")
 NOTIF_URL = requerido("NOTIFICACIONES_URL").rstrip("/")
 # Lee la clave de autenticación del receptor de avisos.
 NOTIF_KEY = requerido("NOTIFICACIONES_KEY")
+NOTIFICATION_TRANSPORT = os.getenv("NOTIFICATION_TRANSPORT", "rabbitmq").lower()
+RABBITMQ_HOST = os.getenv("RABBITMQ_HOST", "127.0.0.1")
+RABBITMQ_PORT = int(os.getenv("RABBITMQ_PORT", "5672"))
+RABBITMQ_USER = os.getenv("RABBITMQ_USER", "guest")
+RABBITMQ_PASSWORD = os.getenv("RABBITMQ_PASSWORD", "guest")
+RABBITMQ_VHOST = os.getenv("RABBITMQ_VHOST", "/")
+RABBITMQ_EXCHANGE = os.getenv("RABBITMQ_EXCHANGE", "ventas.events")
+RABBITMQ_ROUTING_KEY = os.getenv("RABBITMQ_ROUTING_KEY", "venta.completada")
 # Valida que ambas claves de integración tengan 32 caracteres o más.
 if min(len(SERVICE_KEY), len(NOTIF_KEY)) < 32:
     # Detiene el arranque con un error claro cuando falta configuración.

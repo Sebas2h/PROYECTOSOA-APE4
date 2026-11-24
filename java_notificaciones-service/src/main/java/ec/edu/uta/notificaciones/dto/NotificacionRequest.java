@@ -2,6 +2,8 @@ package ec.edu.uta.notificaciones.dto;
 
 public class NotificacionRequest {
 
+    private String eventoId;
+    private Integer ventaId;
     private Integer vehiculoId;
     private String destinatario;
     private String tipo;
@@ -10,7 +12,6 @@ public class NotificacionRequest {
     public Integer getVehiculoId() {
         return vehiculoId;
     }
-
     public void setVehiculoId(Integer vehiculoId) {
         this.vehiculoId = vehiculoId;
     }
@@ -38,4 +39,9 @@ public class NotificacionRequest {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
+
+    public String getEventoId() { return eventoId; }
+    public void setEventoId(String eventoId) { this.eventoId = eventoId; }
+    public Integer getVentaId() { return ventaId; }
+    public void setVentaId(Integer ventaId) { this.ventaId = ventaId; }
 }

@@ -1,3 +1,5 @@
+#nullable enable
+
 namespace ConsultaVehiculosWinForms;
 
 partial class FormPrincipal
@@ -8,6 +10,10 @@ partial class FormPrincipal
     private Label lblToken = null!;
     private TextBox txtToken = null!;
     private Button btnConsultar = null!;
+    private Button btnCrearVehiculo = null!;
+    private Button btnCrearComprador = null!;
+    private Button btnListarCompradores = null!;
+    private Button btnListarVentas = null!;
     private Label lblEstado = null!;
     private Label lblTotal = null!;
     private DataGridView dgvVehiculos = null!;
@@ -29,6 +35,10 @@ partial class FormPrincipal
         lblToken = new Label();
         txtToken = new TextBox();
         btnConsultar = new Button();
+        btnCrearVehiculo = new Button();
+        btnCrearComprador = new Button();
+        btnListarCompradores = new Button();
+        btnListarVentas = new Button();
         lblEstado = new Label();
         lblTotal = new Label();
         dgvVehiculos = new DataGridView();
@@ -75,26 +85,67 @@ partial class FormPrincipal
         txtToken.Size = new Size(975, 30);
         txtToken.TabIndex = 0;
         txtToken.UseSystemPasswordChar = true;
+        txtToken.TextChanged += txtToken_TextChanged;
         // 
         // btnConsultar
         // 
         btnConsultar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
         btnConsultar.Location = new Point(30, 196);
         btnConsultar.Name = "btnConsultar";
-        btnConsultar.Size = new Size(212, 42);
+        btnConsultar.Size = new Size(155, 42);
         btnConsultar.TabIndex = 1;
-        btnConsultar.Text = "Consultar";
+        btnConsultar.Text = "Listar vehículos";
         btnConsultar.UseVisualStyleBackColor = true;
         btnConsultar.Click += btnConsultar_Click;
+        // 
+        // btnCrearVehiculo
+        // 
+        btnCrearVehiculo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        btnCrearVehiculo.Location = new Point(195, 196);
+        btnCrearVehiculo.Name = "btnCrearVehiculo";
+        btnCrearVehiculo.Size = new Size(170, 42);
+        btnCrearVehiculo.Text = "Crear vehículo";
+        btnCrearVehiculo.UseVisualStyleBackColor = true;
+        btnCrearVehiculo.Click += btnCrearVehiculo_Click;
+        // 
+        // btnCrearComprador
+        // 
+        btnCrearComprador.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        btnCrearComprador.Location = new Point(375, 196);
+        btnCrearComprador.Name = "btnCrearComprador";
+        btnCrearComprador.Size = new Size(185, 42);
+        btnCrearComprador.Text = "Crear comprador";
+        btnCrearComprador.UseVisualStyleBackColor = true;
+        btnCrearComprador.Click += btnCrearComprador_Click;
+        // 
+        // btnListarCompradores
+        // 
+        btnListarCompradores.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        btnListarCompradores.Location = new Point(570, 196);
+        btnListarCompradores.Name = "btnListarCompradores";
+        btnListarCompradores.Size = new Size(205, 42);
+        btnListarCompradores.Text = "Listar compradores";
+        btnListarCompradores.UseVisualStyleBackColor = true;
+        btnListarCompradores.Click += btnListarCompradores_Click;
+        // 
+        // btnListarVentas
+        // 
+        btnListarVentas.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        btnListarVentas.Location = new Point(785, 196);
+        btnListarVentas.Name = "btnListarVentas";
+        btnListarVentas.Size = new Size(155, 42);
+        btnListarVentas.Text = "Listar ventas";
+        btnListarVentas.UseVisualStyleBackColor = true;
+        btnListarVentas.Click += btnListarVentas_Click;
         // 
         // lblEstado
         // 
         lblEstado.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         lblEstado.Font = new Font("Segoe UI", 9F);
         lblEstado.ForeColor = Color.FromArgb(50, 64, 76);
-        lblEstado.Location = new Point(268, 202);
+        lblEstado.Location = new Point(30, 242);
         lblEstado.Name = "lblEstado";
-        lblEstado.Size = new Size(254, 36);
+        lblEstado.Size = new Size(975, 30);
         lblEstado.TabIndex = 3;
         lblEstado.Text = "Bandera";
         lblEstado.TextAlign = ContentAlignment.MiddleLeft;
@@ -120,7 +171,7 @@ partial class FormPrincipal
         dgvVehiculos.BackgroundColor = Color.White;
         dgvVehiculos.ColumnHeadersHeight = 38;
         dgvVehiculos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-        dgvVehiculos.Location = new Point(30, 264);
+        dgvVehiculos.Location = new Point(30, 282);
         dgvVehiculos.MultiSelect = false;
         dgvVehiculos.Name = "dgvVehiculos";
         dgvVehiculos.ReadOnly = true;
@@ -128,7 +179,7 @@ partial class FormPrincipal
         dgvVehiculos.RowHeadersWidth = 51;
         dgvVehiculos.RowTemplate.Height = 30;
         dgvVehiculos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        dgvVehiculos.Size = new Size(975, 350);
+        dgvVehiculos.Size = new Size(975, 332);
         dgvVehiculos.TabIndex = 2;
         // 
         // FormPrincipal
@@ -142,6 +193,10 @@ partial class FormPrincipal
         Controls.Add(lblToken);
         Controls.Add(txtToken);
         Controls.Add(btnConsultar);
+        Controls.Add(btnCrearVehiculo);
+        Controls.Add(btnCrearComprador);
+        Controls.Add(btnListarCompradores);
+        Controls.Add(btnListarVentas);
         Controls.Add(lblEstado);
         Controls.Add(dgvVehiculos);
         Controls.Add(lblTotal);

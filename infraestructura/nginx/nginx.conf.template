@@ -1,0 +1,44 @@
+worker_processes 1;
+error_log logs/error.log notice;
+pid logs/nginx.pid;
+events { worker_connections 1024; }
+http {
+    include C:/NGINX/conf/mime.types;
+    default_type application/octet-stream;
+    log_format upstream_log '$remote_addr [$time_local] "$request" $status upstream=$upstream_addr';
+    access_log logs/access.log upstream_log;
+    sendfile on;
+    upstream vehiculos_backend {
+        server 127.0.0.1:{{JAVA_A}} weight=3 max_fails=2 fail_timeout=5s;
+        server 127.0.0.1:{{JAVA_B}} weight=1 max_fails=2 fail_timeout=5s;
+        keepalive 16;
+    }
+    upstream ventas_backend { server 127.0.0.1:{{VENTAS}}; }
+    upstream notificaciones_backend { server 127.0.0.1:{{NOTIF}}; }
+    server {
+        listen {{NGINX}};
+        server_name localhost;
+        location = /nginx-ping {
+            default_type application/json;
+            return 200 '{"status":"UP","servicio":"nginx"}';
+        }
+        location ~ ^/(oauth|api/vehiculos|api/reservas|api/identidad) {
+            proxy_pass http://vehiculos_backend;
+            proxy_http_version 1.1;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            add_header X-Upstream-Addr $upstream_addr always;
+        }
+        location ~ ^/api/(compradores|ventas) {
+            proxy_pass http://ventas_backend;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+        location ^~ /api/notificaciones {
+            proxy_pass http://notificaciones_backend;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+    }
+}

@@ -10,6 +10,7 @@ from app.schemas import CrearVenta, CrearComprador
 from app.security import identidad, vendedor, propietario
 from app.errors import ApiError
 from app.services import venta_service as service
+from sqlalchemy import select
 # Crea el agrupador de rutas HTTP con prefijo /api.
 router = APIRouter(prefix="/api")
 
@@ -28,6 +29,17 @@ def crear_comprador(d: CrearComprador, u=Depends(identidad)):
         db.add(c); db.flush()
         # Envía al cliente el nuevo comprador sin exponer campos internos.
         return {"id": c.id, "nombre": c.nombre, "correo": c.correo}
+
+
+@router.get("/compradores")
+def listar_compradores(u=Depends(identidad)):
+    with SessionLocal() as db:
+        consulta = select(Comprador)
+        if "ROLE_ADMIN" not in u["roles"]:
+            consulta = consulta.where(Comprador.usuario == u["usuario"])
+        return [{"id": c.id, "documento": c.documento,
+                 "nombre": c.nombre, "correo": c.correo}
+                for c in db.scalars(consulta.order_by(Comprador.id)).all()]
 
 
 # Expone POST /api/ventas; requiere JWT y Idempotency-Key.
@@ -68,3 +80,13 @@ def obtener(id: int, u=Depends(identidad)):
         propietario(u, v.usuario)
         # Devuelve el mismo formato JSON que POST.
         return service.salida(v)
+
+
+@router.get("/ventas")
+def listar_ventas(u=Depends(identidad)):
+    with SessionLocal() as db:
+        consulta = select(Venta)
+        if "ROLE_ADMIN" not in u["roles"]:
+            consulta = consulta.where(Venta.usuario == u["usuario"])
+        return [service.salida(v) for v in db.scalars(
+            consulta.order_by(Venta.id.desc())).all()]

@@ -69,3 +69,18 @@ export async function listarVehiculos(token) {
 
   return { vehiculos: datos, codigoHttp: respuesta.status };
 }
+
+export async function listarVentas(token) {
+  const headers = new Headers({ Accept: 'application/json' });
+  if (token.trim()) headers.set('Authorization', `Bearer ${token.trim()}`);
+  let respuesta;
+  try { respuesta = await fetch('/api/ventas', { headers, cache: 'no-store' }); }
+  catch { throw new Error('No se pudo conectar con la API de ventas.'); }
+  if (!respuesta.ok) {
+    const error = new Error(`HTTP ${respuesta.status}: no se pudieron consultar las ventas.`);
+    error.status = respuesta.status; throw error;
+  }
+  const ventas = await respuesta.json();
+  if (!Array.isArray(ventas)) throw new Error('Se esperaba una lista JSON de ventas.');
+  return ventas;
+}

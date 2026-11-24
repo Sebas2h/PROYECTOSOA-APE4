@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { listarVehiculos } from './api/vehiculosApi.js';
+import { listarVehiculos, listarVentas } from './api/vehiculosApi.js';
 import './App.css';
 
 // Ecuador usa dólares estadounidenses. No modifica el precio de la API.
@@ -20,6 +20,7 @@ export default function App() {
   const [token, setToken] = useState('');
   const [mostrarToken, setMostrarToken] = useState(false);
   const [vehiculos, setVehiculos] = useState([]);
+  const [ventas, setVentas] = useState([]);
   const [marca, setMarca] = useState('');
   const [seleccionado, setSeleccionado] = useState(null);
   const [cargando, setCargando] = useState(false);
@@ -44,8 +45,11 @@ export default function App() {
 
     try {
       // La conexión HTTP se realiza en otro archivo, no en la interfaz.
-      const resultado = await listarVehiculos(token);
+      const [resultado, ventasResultado] = await Promise.all([
+        listarVehiculos(token), listarVentas(token),
+      ]);
       setVehiculos(resultado.vehiculos);
+      setVentas(ventasResultado);
       setCodigoHttp(resultado.codigoHttp);
       setMensaje(`Consulta correcta: ${resultado.vehiculos.length} vehículos.`);
     } catch (e) {
@@ -71,7 +75,7 @@ export default function App() {
         <h2 id="titulo-acceso">1. Conexión con la API</h2>
         <p className="ayuda">
           La aplicación consulta <code>GET /api/vehiculos</code> mediante el
-          proxy local hacia <code>127.0.0.1:8080</code>.
+          gateway NGINX en <code>127.0.0.1:8090</code>.
         </p>
 
         <form onSubmit={consultarVehiculos}>
@@ -199,6 +203,14 @@ export default function App() {
         ) : (
           <p className="ayuda">Después de consultar, seleccione el ID de una fila para ver sus datos.</p>
         )}
+      </section>
+
+      <section className="panel" aria-labelledby="titulo-ventas">
+        <h2 id="titulo-ventas">4. Ventas registradas (solo consulta)</h2>
+        <div className="tabla-scroll"><table><thead><tr><th>ID</th><th>Vehículo</th><th>Comprador</th><th>Estado</th><th>Notificación</th></tr></thead>
+          <tbody>{ventas.map((v) => <tr key={v.id}><td>{v.id}</td><td>{v.vehiculoId}</td><td>{v.compradorId}</td><td>{v.estado}</td><td>{v.notificacion}</td></tr>)}
+          {!ventas.length && <tr><td className="sin-datos" colSpan="5">No hay ventas visibles para este usuario.</td></tr>}</tbody></table></div>
+        <p className="nota">Este cliente no contiene formulario ni petición POST de venta.</p>
       </section>
     </main>
   );

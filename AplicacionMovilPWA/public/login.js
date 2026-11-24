@@ -1,0 +1,4 @@
+import { login } from './api.js';
+const form=document.querySelector('#loginForm'),mensaje=document.querySelector('#loginMessage');
+if(sessionStorage.getItem('ape04.jwt'))location.replace('/dashboard.html');
+form.addEventListener('submit',async e=>{e.preventDefault();const button=document.querySelector('#loginBtn');button.disabled=true;button.textContent='Validando…';try{const token=await login({usuario:form.usuario.value.trim(),clave:form.password.value,cliente:document.querySelector('#cliente').value,secreto:form.secret.value});sessionStorage.setItem('ape04.jwt',token);sessionStorage.setItem('ape04.usuario',form.usuario.value.trim());form.password.value='';form.secret.value='';location.replace('/dashboard.html');}catch(error){mensaje.className='notice error';mensaje.textContent=error.message;form.password.value='';form.secret.value='';}finally{button.disabled=false;button.innerHTML='Entrar al sistema <span>→</span>';}});

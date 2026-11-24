@@ -17,7 +17,9 @@ import java.util.concurrent.CompletionException;
 
 public final class VehiculosApiClient{
 
-    private static final String URL_API = "http://127.0.0.1:8080/api/vehiculos";
+    private static final String URL_API = System.getenv()
+            .getOrDefault("APE04_BASE_URL", "http://127.0.0.1:8090")
+            .replaceAll("/$", "") + "/api/vehiculos";
     private final HttpClient clienteHttp = HttpClient.newBuilder()
                                             .connectTimeout(Duration.ofSeconds(5))
                                             .build();

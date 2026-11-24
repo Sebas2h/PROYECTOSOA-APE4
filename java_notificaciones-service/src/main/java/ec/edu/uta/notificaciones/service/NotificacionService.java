@@ -2,12 +2,22 @@ package ec.edu.uta.notificaciones.service;
 
 import ec.edu.uta.notificaciones.dto.NotificacionRequest;
 import ec.edu.uta.notificaciones.dto.NotificacionResponse;
+import ec.edu.uta.notificaciones.model.Notificacion;
+import ec.edu.uta.notificaciones.repository.NotificacionRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @Service
 public class NotificacionService {
+
+    private final NotificacionRepository repository;
+
+    public NotificacionService(NotificacionRepository repository) {
+        this.repository = repository;
+    }
 
     private static final Set<String> TIPOS_PERMITIDOS =
             Set.of("REGISTRO", "ACTUALIZACION", "ELIMINACION", "VENTA");
@@ -34,38 +44,28 @@ public class NotificacionService {
         }
 
 
-        System.out.println(
-        "================================="
-        );
-
-        System.out.println(
-                "NOTIFICACIÓN RECIBIDA"
-        );
-
-        System.out.println(
-                "Vehículo: "
-                        + request.getVehiculoId()
-        );
-
-        System.out.println(
-                "Tipo: "
-                        + request.getTipo()
-        );
-
-        System.out.println(
-                "Mensaje: "
-                        + request.getMensaje()
-        );
-
-        System.out.println(
-                "================================="
-        );
-        // En este taller no se envía realmente correo/SMS.
-        // Solo se simula que la notificación fue procesada.
+        String eventoId = request.getEventoId();
+        if (eventoId == null || eventoId.isBlank()) eventoId = UUID.randomUUID().toString();
+        if (repository.existsByEventoId(eventoId)) {
+            return new NotificacionResponse(true, eventoId, "DUPLICADA", "Evento ya procesado");
+        }
+        Notificacion n = new Notificacion();
+        n.setEventoId(eventoId);
+        n.setVentaId(request.getVentaId());
+        n.setVehiculoId(request.getVehiculoId());
+        n.setDestinatario(request.getDestinatario().trim());
+        n.setTipo(request.getTipo().toUpperCase());
+        n.setMensaje(request.getMensaje().trim());
+        repository.save(n);
         return new NotificacionResponse(
                 true,
+                eventoId,
                 "ENVIADA",
                 "Notificación procesada correctamente"
         );
+    }
+
+    public List<Notificacion> listar() {
+        return repository.findAllByOrderByRecibidaEnDesc();
     }
 }

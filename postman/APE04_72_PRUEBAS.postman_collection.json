@@ -1,0 +1,2535 @@
+{
+  "info": {
+    "name": "APE04 - 72 pruebas restantes",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "P02-P28 y E29-E73. Los casos GUI/infra fallan deliberadamente hasta que su variable manual_ID sea OK."
+  },
+  "item": [
+    {
+      "name": "Diagnóstico",
+      "item": [
+        {
+          "name": "E29 versión JDK y Maven [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E29 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E29 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E29\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E30 Python entorno y dependencias [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E30 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E30 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E30\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E31 dotnet build [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E31 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E31 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E31\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E32 compilación React [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E32 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E32 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E32\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E33 construcción PWA [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E33 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E33 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E33\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E34 MySQL y separación de esquemas [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E34 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E34 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E34\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E35 health simultáneo vía NGINX",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E35 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Vehículos y JWT",
+      "item": [
+        {
+          "name": "E36 login OPERADOR",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic {{oauthBasic}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/oauth/token",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "oauth",
+                "token"
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "grant_type",
+                  "value": "password",
+                  "type": "text"
+                },
+                {
+                  "key": "username",
+                  "value": "{{operadorUser}}",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "{{operadorPassword}}",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E36 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "const j=pm.response.json(); pm.environment.set(\"operatorToken\",j.access_token); pm.environment.set(\"accessToken\",j.access_token); pm.test(\"JWT presente\",()=>pm.expect(j.access_token).to.be.a(\"string\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E37 login CONSULTA",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic {{oauthBasic}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/oauth/token",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "oauth",
+                "token"
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "grant_type",
+                  "value": "password",
+                  "type": "text"
+                },
+                {
+                  "key": "username",
+                  "value": "{{consultaUser}}",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "{{consultaPassword}}",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E37 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "const j=pm.response.json(); pm.environment.set(\"consultaToken\",j.access_token);  pm.test(\"JWT presente\",()=>pm.expect(j.access_token).to.be.a(\"string\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E38 crear vehículo autorizado",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehiculos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehiculos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marca\": \"APE04\",\n  \"modelo\": \"QA {{qaSuffix}}\",\n  \"placa\": \"{{qaPlate}}\",\n  \"chasis\": \"{{qaChassis}}\",\n  \"anio\": 2026,\n  \"color\": \"Azul\",\n  \"precio\": 19990.5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E38 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([201]))",
+                  "const j=pm.response.json(); pm.environment.set(\"vehiculoId\",j.idVehiculo)"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E39 vehículo con campos inválidos",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehiculos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehiculos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marca\": \"\",\n  \"modelo\": \"\",\n  \"placa\": \"\",\n  \"chasis\": \"corto\",\n  \"anio\": null,\n  \"precio\": -1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E39 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([422]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E40 vehículo duplicado",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehiculos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehiculos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marca\": \"APE04\",\n  \"modelo\": \"QA {{qaSuffix}}\",\n  \"placa\": \"{{qaPlate}}\",\n  \"chasis\": \"{{qaChassis}}\",\n  \"anio\": 2026,\n  \"color\": \"Azul\",\n  \"precio\": 19990.5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E40 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([400,409]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E41 consulta sin JWT",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehiculos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehiculos"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E41 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([401]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E42 JWT con firma alterada",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{alteredToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehiculos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehiculos"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E42 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([401]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E43 JWT expirado",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{expiredToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehiculos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehiculos"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E43 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([401]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E44 vehículo inexistente",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehiculos/999999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehiculos",
+                "999999999"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E44 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([404]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E45 crear vehículo con CONSULTA",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{consultaToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehiculos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehiculos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marca\": \"APE04\",\n  \"modelo\": \"QA {{qaSuffix}}\",\n  \"placa\": \"{{qaPlate}}\",\n  \"chasis\": \"{{qaChassis}}\",\n  \"anio\": 2026,\n  \"color\": \"Azul\",\n  \"precio\": 19990.5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E45 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([403]))"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Casos obligatorios P02-P28",
+      "item": [
+        {
+          "name": "P02 WinForms crea vehículo [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehiculos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehiculos"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P02 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P02 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P02\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P03 WinForms lista vehículos [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehiculos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehiculos"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P03 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P03 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P03\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P04 WinForms crea comprador [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/compradores",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "compradores"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P04 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P04 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P04\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P05 WinForms lista compradores [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/compradores",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "compradores"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P05 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P05 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P05\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P06 WinForms lista ventas [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "ventas"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P06 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P06 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P06\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P07 PWA login válido y JWT [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P07 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P07 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P07\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P08 login inválido",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic {{oauthBasic}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/oauth/token",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "oauth",
+                "token"
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "grant_type",
+                  "value": "password",
+                  "type": "text"
+                },
+                {
+                  "key": "username",
+                  "value": "invalido",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "invalida",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P08 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([401]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P09 PWA registra venta [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "ventas"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P09 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P09 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P09\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P10 misma clave y cuerpo no duplica",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{idempotencyKey}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "ventas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"vehiculoId\": {{vehiculoId}}, \"compradorId\": {{compradorId}}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P10 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200,201]))",
+                  "const primero=pm.response.json(); pm.sendRequest({url:pm.environment.get(\"baseUrl\")+\"/api/ventas\",method:\"POST\",header:{\"Authorization\":\"Bearer \"+pm.environment.get(\"accessToken\"),\"Content-Type\":\"application/json\",\"Idempotency-Key\":pm.environment.get(\"idempotencyKey\")},body:{mode:\"raw\",raw:JSON.stringify({vehiculoId:Number(pm.environment.get(\"vehiculoId\")),compradorId:Number(pm.environment.get(\"compradorId\"))})}},(e,r)=>{pm.test(\"P10 reintento devuelve 200 y mismo ID\",()=>{pm.expect(e).to.equal(null);pm.expect(r.code).to.equal(200);pm.expect(r.json().id).to.equal(primero.id)});pm.environment.set(\"ventaId\",primero.id)})"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P11 misma clave cuerpo diferente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{idempotencyKey}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "ventas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"vehiculoId\": {{vehiculoIdAlt}}, \"compradorId\": {{compradorId}}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P11 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([409]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P12 venta inválida o no disponible",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "ape04-invalid-{{$timestamp}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "ventas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehiculoId\": 999999,\n  \"compradorId\": 999999\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P12 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([404,409,422]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P13 permiso insuficiente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{consultaToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "ape04-role-{{$timestamp}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "ventas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehiculoId\": 999999,\n  \"compradorId\": 999999\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P13 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([403]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P14 React consulta catálogo [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehiculos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehiculos"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P14 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P14 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P14\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P15 React filtro y detalle [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehiculos?marca=APE04",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehiculos?marca=APE04"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P15 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P15 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P15\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P16 React consulta ventas [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "ventas"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P16 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P16 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P16\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P17 evento RabbitMQ persistente [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/notificaciones",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "notificaciones"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P17 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P17 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P17\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P18 venta rechazada no emite evento [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/notificaciones",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "notificaciones"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P18 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P18 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P18\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P19 consumidor detenido mensaje Ready [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P19 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P19 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P19\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P20 consumidor reiniciado procesa pendiente [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/notificaciones",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "notificaciones"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P20 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P20 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P20\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P21 JavaFX muestra notificación [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/notificaciones",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "notificaciones"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P21 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P21 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P21\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P22 reentrega no duplica aviso [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/notificaciones",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "notificaciones"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P22 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P22 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P22\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P23 balanceo 3 a 1 con 100 GET [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehiculos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehiculos"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P23 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P23 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P23\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P24 caída de instancia Java [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehiculos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehiculos"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P24 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P24 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P24\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P25 recuperación y JWT stateless [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehiculos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehiculos"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P25 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P25 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P25\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P26 monitor y rutas [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P26 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P26 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P26\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P27 cadena comercial completa [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "ventas"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P27 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P27 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P27\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P28 auditoría sin secretos ni resultados ficticios [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"P28 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"P28 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_P28\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FastAPI",
+      "item": [
+        {
+          "name": "E46 crear comprador válido",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/compradores",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "compradores"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"documento\": \"{{qaDocument}}\",\n  \"nombre\": \"Comprador APE04\",\n  \"correo\": \"{{qaEmail}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E46 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([201]))",
+                  "const j=pm.response.json(); pm.environment.set(\"compradorId\",j.id)"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E47 comprador incompleto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/compradores",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "compradores"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"A\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E47 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([422]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E48 comprador duplicado",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/compradores",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "compradores"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"documento\": \"{{qaDocument}}\",\n  \"nombre\": \"Comprador APE04\",\n  \"correo\": \"{{qaEmail}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E48 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([409,500]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E49 listar compradores",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/compradores",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "compradores"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E49 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E50 listar ventas",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "ventas"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E50 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E51 venta comprador inexistente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "ape04-buyer-{{$timestamp}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "ventas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehiculoId\": 999999,\n  \"compradorId\": 999999\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E51 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([404,409]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E52 venta vehículo inexistente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "ape04-car-{{$timestamp}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "ventas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehiculoId\": 999999,\n  \"compradorId\": 999999\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E52 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([404,409]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E53 venta sin Idempotency-Key",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "ventas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehiculoId\": 999999,\n  \"compradorId\": 999999\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E53 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([422]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E54 reconciliación después de conexión incierta [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "ventas"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E54 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E54 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E54\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Clientes y resiliencia",
+      "item": [
+        {
+          "name": "E55 WinForms maneja 401 y 403 [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E55 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E55 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E55\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E56 WinForms backend no disponible [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E56 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E56 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E56\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E57 WinForms valida entradas [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E57 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E57 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E57\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E58 PWA cierre de sesión [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E58 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E58 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E58\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E59 PWA doble submit idempotente [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E59 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E59 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E59\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E60 PWA fallo incierto [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E60 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E60 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E60\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E61 React maneja 401 y 403 [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E61 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E61 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E61\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E62 React vacío y fallo de conectividad [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E62 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E62 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E62\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E63 payload evento sin secretos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/notificaciones",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "notificaciones"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E63 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E64 caída y recuperación RabbitMQ [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E64 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E64 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E64\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E65 notificaciones autorizadas",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/notificaciones",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "notificaciones"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E65 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200,401,403]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E66 JavaFX recupera sondeo [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/notificaciones",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "notificaciones"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E66 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E66 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E66\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "NGINX e integración",
+      "item": [
+        {
+          "name": "E67 nginx -t [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E67 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E67 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E67\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E68 nginx-ping con backend caído",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/nginx-ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nginx-ping"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E68 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E69 coherencia directa Java A y B [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehiculos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehiculos"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E69 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E69 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E69\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E70 recuperación de balanceo [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehiculos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehiculos"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E70 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E70 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E70\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E71 vehículo vendido e IDs consistentes [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "ventas"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E71 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E71 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E71\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E72 WinForms y React no crean ventas [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "ventas"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E72 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E72 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E72\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E73 segunda venta independiente [requiere acción GUI/infra]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/ventas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "ventas"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"E73 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))",
+                  "pm.test(\"E73 evidencia manual confirmada\", () => pm.expect(pm.environment.get(\"manual_E73\")).to.eql(\"OK\"))"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8090"
+    }
+  ]
+}

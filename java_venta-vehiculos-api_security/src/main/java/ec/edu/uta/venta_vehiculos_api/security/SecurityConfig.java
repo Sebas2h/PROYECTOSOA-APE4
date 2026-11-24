@@ -52,6 +52,7 @@ public class SecurityConfig {
     }))
    .authorizeHttpRequests(a -> a
     .requestMatchers("/oauth/token").permitAll()
+    .requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
     .requestMatchers("/api/reservas", "/api/reservas/**",
      "/api/vehiculos/*/reservas").hasRole("SERVICIO_VENTAS")
     .requestMatchers("/api/identidad")

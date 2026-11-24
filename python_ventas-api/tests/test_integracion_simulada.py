@@ -22,6 +22,7 @@ def sistema(monkeypatch):
                 'JAVA_URL':'http://127.0.0.1:8080', 'VENTAS_SERVICE_KEY':'clave_prueba_java_con_32_caracteres_1234',
                 'NOTIFICACIONES_URL':'http://127.0.0.1:8081','NOTIFICACIONES_KEY':'clave_prueba_notif_con_32_caracteres_123'}.items():
         monkeypatch.setenv(k,v)
+    monkeypatch.setenv('NOTIFICATION_TRANSPORT', 'http')
     # Fuerza a cargar los módulos para usar el motor temporal de pruebas.
     for name in list(sys.modules):
         if name == 'app' or name.startswith('app.'):

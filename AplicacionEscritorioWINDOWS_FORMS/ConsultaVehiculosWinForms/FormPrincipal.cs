@@ -7,10 +7,12 @@ namespace ConsultaVehiculosWinForms;
 public partial class FormPrincipal : Form
 {
     // El endpoint real está definido en VehiculoController.java.
-    private const string UrlJava = "http://127.0.0.1:8080/";
+    private static readonly string UrlJava =
+        (Environment.GetEnvironmentVariable("APE04_BASE_URL")
+         ?? "http://127.0.0.1:8090").TrimEnd('/') + "/";
 
     // Se reutiliza un solo cliente HTTP durante toda la aplicación.
-    private static readonly HttpClient ClienteHttp = new()
+    internal static readonly HttpClient ClienteHttp = new()
     {
         BaseAddress = new Uri(UrlJava),
         Timeout = TimeSpan.FromSeconds(15)
@@ -21,16 +23,18 @@ public partial class FormPrincipal : Form
         InitializeComponent();
     }
 
+    internal string ObtenerToken()
+    {
+        string token = txtToken.Text.Trim();
+        return token.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase)
+            ? token[7..].Trim()
+            : token;
+    }
+
     // Este es el único botón de la ventana: llama a Spring Boot y llena la grilla.
     private async void btnConsultar_Click(object? sender, EventArgs e)
     {
-        string token = txtToken.Text.Trim();
-
-
-        if (token.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
-        {
-            token = token[7..].Trim();
-        }
+        string token = ObtenerToken();
 
         if (string.IsNullOrWhiteSpace(token))
         {
@@ -106,6 +110,51 @@ public partial class FormPrincipal : Form
         }
     }
 
+    private void btnCrearVehiculo_Click(object? sender, EventArgs e)
+    {
+        if (!ValidarToken()) return;
+        using var formulario = new FormCrearVehiculo(ObtenerToken());
+        formulario.ShowDialog(this);
+        if (formulario.VehiculoCreado) btnConsultar.PerformClick();
+    }
+
+    private void btnCrearComprador_Click(object? sender, EventArgs e)
+    {
+        if (!ValidarToken()) return;
+        using var formulario = new FormCrearComprador(ObtenerToken());
+        formulario.ShowDialog(this);
+    }
+
+    private void btnListarCompradores_Click(object? sender, EventArgs e)
+    {
+        if (!ValidarToken()) return;
+        using var formulario = new FormCompradores(ObtenerToken());
+        formulario.ShowDialog(this);
+    }
+
+    private void btnListarVentas_Click(object? sender, EventArgs e)
+    {
+        if (!ValidarToken()) return;
+        using var formulario = new FormVentas(ObtenerToken());
+        formulario.ShowDialog(this);
+    }
+
+    private bool ValidarToken()
+    {
+        if (!string.IsNullOrWhiteSpace(ObtenerToken())) return true;
+        LimpiarDatos();
+        MostrarEstado("Ingrese primero el JWT que se usará en todas las operaciones.", esError: true);
+        txtToken.Focus();
+        return false;
+    }
+
+    private void txtToken_TextChanged(object? sender, EventArgs e)
+    {
+        if (!string.IsNullOrWhiteSpace(ObtenerToken())) return;
+        LimpiarDatos();
+        MostrarEstado("Ingrese un JWT para consultar o administrar datos.");
+    }
+
     private void LimpiarDatos()
     {
         dgvVehiculos.DataSource = null;
@@ -118,7 +167,7 @@ public partial class FormPrincipal : Form
         lblEstado.Text = mensaje;
     }
 
-    private void lblTitulo_Click(object sender, EventArgs e)
+    private void lblTitulo_Click(object? sender, EventArgs e)
     {
 
     }

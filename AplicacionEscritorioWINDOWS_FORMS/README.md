@@ -45,4 +45,10 @@ Como alternativa, se ejecuta desde Visual Studio mediante `F5`.
 3. Se presiona **Consultar** y se verifica el listado de vehículos y el contador.
 4. Se cierra la ventana para finalizar.
 
-> La aplicación incluida realiza la consulta de vehículos; otras operaciones requieren ampliación del cliente.
+El mismo JWT escrito en la ventana principal se reutiliza para las operaciones administrativas exigidas:
+
+- crear y listar vehículos;
+- crear y listar compradores;
+- listar ventas.
+
+La aplicación no registra ventas, ya que esa operación corresponde exclusivamente a la PWA.

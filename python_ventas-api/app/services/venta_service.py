@@ -18,7 +18,8 @@ from app.models import Venta, Comprador
 from app.repositories.venta_repository import VentaRepository
 from app.clients.vehiculos_client import VehiculosClient, FalloRemoto
 # Importa el componente local correspondiente a esta responsabilidad.
-from app.config import NOTIF_URL, NOTIF_KEY
+from app.config import NOTIF_URL, NOTIF_KEY, NOTIFICATION_TRANSPORT
+from app.messaging import publicar_venta
 from app.errors import ApiError
 from app.security import propietario
 # Prepara el cliente HTTP de reservas de Java.
@@ -207,21 +208,21 @@ def notificar(id):
             # Finaliza inmediatamente porque ya no hay trabajo pendiente.
             return
         # Empieza una sección controlada para recuperar los errores esperados.
+        evento = {
+            "eventoId": v.operacion_id, "ventaId": v.id,
+            "vehiculoId": v.vehiculo_id, "tipo": "VENTA",
+            "destinatario": v.comprador.correo,
+            "mensaje": f"Venta {v.id} operación {v.operacion_id} completada",
+        }
         try:
-            # Hace un POST HTTP al receptor de notificaciones.
-            r = httpx.post(NOTIF_URL + "/api/notificaciones", timeout=3,
-                # Envía la clave compartida; debe coincidir con el filtro Java.
-                headers={"X-Notification-Key": NOTIF_KEY}, json={
-                    # Agrega IDs de vehículo y comprador referenciados.
-                    "vehiculoId": v.vehiculo_id, "tipo": "VENTA",
-                    # Usa el correo del comprador de esta venta.
-                    "destinatario": v.comprador.correo,
-                    # Construye un mensaje rastreable por ID y UUID.
-                    "mensaje": f"Venta {v.id} operación {v.operacion_id} completada",
-                })
-            # Marca como ENVIADA solo ante HTTP exitoso 2xx.
-            v.notificacion = "ENVIADA" if 200 <= r.status_code < 300 else "PENDIENTE"
-        # Si hay un problema de red, conserva la notificación pendiente.
-        except httpx.RequestError:
+            if NOTIFICATION_TRANSPORT == "http":
+                r = httpx.post(NOTIF_URL + "/api/notificaciones", timeout=3,
+                    headers={"X-Notification-Key": NOTIF_KEY}, json=evento)
+                v.notificacion = "ENVIADA" if 200 <= r.status_code < 300 else "PENDIENTE"
+            else:
+                publicar_venta(evento)
+                v.notificacion = "ENVIADA"
+        # Si hay un problema de red o broker, conserva la notificación pendiente.
+        except Exception:
             # Permite reintento posterior del worker.
             v.notificacion = "PENDIENTE"

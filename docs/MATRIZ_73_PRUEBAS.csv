@@ -1,0 +1,2 @@
+ID,precondicion,accion,rol,metodo_ruta,esperado,resultado_real,HTTP,estado,figura,interpretacion
+P01,"Servicios locales iniciados","Verificar listeners y ejecutar health de Java A en Postman","N/A","GET http://127.0.0.1:8080/actuator/health","Servicio accesible y estado UP","Postman devolvió status UP; se observaron listeners de MySQL RabbitMQ Java A/B notificaciones FastAPI NGINX y monitor",200,APROBADA,FIG_002,"La conectividad inicial del núcleo de servicios quedó comprobada; React y PWA se validarán en sus casos específicos"

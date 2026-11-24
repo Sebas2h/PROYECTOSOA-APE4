@@ -1,0 +1,170 @@
+{
+  "input": "C:\\Users\\Sebas2hVR\\Git\\PROYECTOSOA-APE4\\docs\\informe_work\\plantilla_original.docx",
+  "fonts_by_char_count": {
+    "Times New Roman": 2028
+  },
+  "direct_run_formatting_runs": 162,
+  "direct_paragraph_formatting_paragraphs": 78,
+  "heading_like_paragraphs_not_heading_style": [
+    {
+      "para_index": 1,
+      "text": "INFORME DE GU\u00cdA PR\u00c1CTICA",
+      "style": "Normal"
+    },
+    {
+      "para_index": 3,
+      "text": "PORTADA",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 11,
+      "text": "INFORME DE GU\u00cdA PR\u00c1CTICA",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 12,
+      "text": "PP",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 13,
+      "text": "YY",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 14,
+      "text": "Objetivos",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 24,
+      "text": "Modalidad",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 27,
+      "text": "Tiempo de duraci\u00f3n",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 28,
+      "text": "Presenciales: Detallado en la gu\u00eda",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 29,
+      "text": "No presenciales: Detallado en la gu\u00eda",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 31,
+      "text": "Instrucciones",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 34,
+      "text": "Listado de equipos, materiales y recursos ",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 48,
+      "text": "Actividades por desarrollar",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 51,
+      "text": "Resultados obtenidos",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 53,
+      "text": "Habilidades blandas empleadas en la pr\u00e1ctica",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 65,
+      "text": "Conclusiones",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 68,
+      "text": "Recomendaciones",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 71,
+      "text": "Referencias bibliogr\u00e1ficas",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 74,
+      "text": "Anexos",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 77,
+      "text": "UNIVERSIDAD T\u00c9CNICA DE AMBATO",
+      "style": "Header"
+    }
+  ],
+  "examples": {
+    "direct_paragraph_formatting": [
+      {
+        "para_index": 1,
+        "text": "INFORME DE GU\u00cdA PR\u00c1CTICA",
+        "style": "Normal"
+      },
+      {
+        "para_index": 2,
+        "text": "",
+        "style": "Normal"
+      },
+      {
+        "para_index": 3,
+        "text": "PORTADA",
+        "style": "List Paragraph"
+      },
+      {
+        "para_index": 4,
+        "text": "Tema: \t\t\t\t\tTema de la gu\u00eda pr\u00e1ctica proporcionada por el docente",
+        "style": "Normal"
+      },
+      {
+        "para_index": 5,
+        "text": "Unidad de Organizaci\u00f3n Curricular:\t",
+        "style": "Normal"
+      }
+    ],
+    "direct_run_formatting": [
+      {
+        "para_index": 1,
+        "run_text": "INFORME",
+        "style": "Normal"
+      },
+      {
+        "para_index": 1,
+        "run_text": " DE GU\u00cdA ",
+        "style": "Normal"
+      },
+      {
+        "para_index": 1,
+        "run_text": "PR\u00c1CTICA",
+        "style": "Normal"
+      },
+      {
+        "para_index": 3,
+        "run_text": "PORTADA",
+        "style": "List Paragraph"
+      },
+      {
+        "para_index": 4,
+        "run_text": "Tema",
+        "style": "Normal"
+      }
+    ]
+  },
+  "notes": [
+    "Direct formatting is not always wrong, but it often causes inconsistent output when templates change.",
+    "Heading-like paragraphs not using Heading styles can break TOC and accessibility."
+  ]
+}

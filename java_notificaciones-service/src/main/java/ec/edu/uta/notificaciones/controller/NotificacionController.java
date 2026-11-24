@@ -6,6 +6,8 @@ import ec.edu.uta.notificaciones.service.NotificacionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import ec.edu.uta.notificaciones.model.Notificacion;
 
 @RestController
 @RequestMapping("/api/notificaciones")
@@ -27,5 +29,10 @@ public class NotificacionController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(response);
+    }
+
+    @GetMapping
+    public List<Notificacion> listar() {
+        return notificacionService.listar();
     }
 }

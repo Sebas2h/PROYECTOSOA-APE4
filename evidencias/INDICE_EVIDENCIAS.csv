@@ -1,0 +1,4 @@
+figura,prueba_actividad,archivo,fecha,resultado,commit
+FIG_001,Diagnóstico inicial MySQL,evidencias/fase-01/FIG_001_XAMPP_MYSQL_ACTIVO.png,2026-11-23,MySQL activo,SIN_COMMIT
+FIG_002,P01 inicio y conectividad Java A,evidencias/fase-01/FIG_002_P01_HEALTH_JAVA_A_POSTMAN.png,2026-11-23,HTTP 200 status UP,SIN_COMMIT
+FIG_003,Importación de las 72 pruebas restantes en Postman,evidencias/fase-02/FIG_003_POSTMAN_72_PRUEBAS_IMPORTADAS.png,2026-11-23,Colección y entorno importados sin cursor visible,SIN_COMMIT
