@@ -1222,7 +1222,13 @@
           "name": "P17 evento RabbitMQ persistente [requiere acción GUI/infra]",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "X-Notification-Key",
+                "value": "{{notificationKey}}",
+                "type": "text"
+              }
+            ],
             "url": {
               "raw": "{{baseUrl}}/api/notificaciones",
               "host": [
@@ -1251,7 +1257,13 @@
           "name": "P18 venta rechazada no emite evento [requiere acción GUI/infra]",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "X-Notification-Key",
+                "value": "{{notificationKey}}",
+                "type": "text"
+              }
+            ],
             "url": {
               "raw": "{{baseUrl}}/api/notificaciones",
               "host": [
@@ -1308,7 +1320,13 @@
           "name": "P20 consumidor reiniciado procesa pendiente [requiere acción GUI/infra]",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "X-Notification-Key",
+                "value": "{{notificationKey}}",
+                "type": "text"
+              }
+            ],
             "url": {
               "raw": "{{baseUrl}}/api/notificaciones",
               "host": [
@@ -1337,7 +1355,13 @@
           "name": "P21 JavaFX muestra notificación [requiere acción GUI/infra]",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "X-Notification-Key",
+                "value": "{{notificationKey}}",
+                "type": "text"
+              }
+            ],
             "url": {
               "raw": "{{baseUrl}}/api/notificaciones",
               "host": [
@@ -1366,7 +1390,13 @@
           "name": "P22 reentrega no duplica aviso [requiere acción GUI/infra]",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "X-Notification-Key",
+                "value": "{{notificationKey}}",
+                "type": "text"
+              }
+            ],
             "url": {
               "raw": "{{baseUrl}}/api/notificaciones",
               "host": [
@@ -2194,13 +2224,18 @@
           ]
         },
         {
-          "name": "E63 payload evento sin secretos",
+          "name": "E63 consulta de eventos sin exponer secretos",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
                 "value": "Bearer {{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "X-Notification-Key",
+                "value": "{{notificationKey}}",
                 "type": "text"
               }
             ],
@@ -2256,13 +2291,18 @@
           ]
         },
         {
-          "name": "E65 notificaciones autorizadas",
+          "name": "E65 consulta de notificaciones con clave de servicio",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
                 "value": "Bearer {{accessToken}}",
+                "type": "text"
+              },
+              {
+                "key": "X-Notification-Key",
+                "value": "{{notificationKey}}",
                 "type": "text"
               }
             ],
@@ -2283,7 +2323,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"E65 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200,401,403]))"
+                  "pm.test(\"E65 HTTP esperado\", () => pm.expect(pm.response.code).to.be.oneOf([200]))"
                 ]
               }
             }
@@ -2293,7 +2333,13 @@
           "name": "E66 JavaFX recupera sondeo [requiere acción GUI/infra]",
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "X-Notification-Key",
+                "value": "{{notificationKey}}",
+                "type": "text"
+              }
+            ],
             "url": {
               "raw": "{{baseUrl}}/api/notificaciones",
               "host": [

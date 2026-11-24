@@ -5,6 +5,7 @@ const out = __dirname;
 const base = '{{baseUrl}}';
 const auth = [{ key: 'Authorization', value: 'Bearer {{accessToken}}', type: 'text' }];
 const jsonHeader = [{ key: 'Content-Type', value: 'application/json', type: 'text' }];
+const notificationHeader = [{ key: 'X-Notification-Key', value: '{{notificationKey}}', type: 'text' }];
 
 function test(code, expected, extra = '') {
   return [{ listen: 'test', script: { type: 'text/javascript', exec: [
@@ -22,9 +23,10 @@ function req(id, name, method, url, options = {}) {
   return { name: `${id} ${name}`, request, event: test(id, options.expected || [200], options.script || '') };
 }
 
-function manual(id, name, verifyUrl = '/nginx-ping') {
+function manual(id, name, verifyUrl = '/nginx-ping', headers = []) {
   return req(id, `${name} [requiere acción GUI/infra]`, 'GET', verifyUrl, {
     auth: false,
+    headers,
     expected: [200],
     script: `pm.test("${id} evidencia manual confirmada", () => pm.expect(pm.environment.get("manual_${id}")).to.eql("OK"))`
   });
@@ -70,10 +72,10 @@ const folders = [
     req('P12','venta inválida o no disponible','POST','/api/ventas',{headers:[...jsonHeader,{key:'Idempotency-Key',value:'ape04-invalid-{{$timestamp}}',type:'text'}],body:sale,expected:[404,409,422]}),
     req('P13','permiso insuficiente','POST','/api/ventas',{auth:false,headers:[{key:'Authorization',value:'Bearer {{consultaToken}}',type:'text'},...jsonHeader,{key:'Idempotency-Key',value:'ape04-role-{{$timestamp}}',type:'text'}],body:sale,expected:[403]}),
     manual('P14','React consulta catálogo','/api/vehiculos'), manual('P15','React filtro y detalle','/api/vehiculos?marca=APE04'),
-    manual('P16','React consulta ventas','/api/ventas'), manual('P17','evento RabbitMQ persistente','/api/notificaciones'),
-    manual('P18','venta rechazada no emite evento','/api/notificaciones'), manual('P19','consumidor detenido mensaje Ready'),
-    manual('P20','consumidor reiniciado procesa pendiente','/api/notificaciones'), manual('P21','JavaFX muestra notificación','/api/notificaciones'),
-    manual('P22','reentrega no duplica aviso','/api/notificaciones'), manual('P23','balanceo 3 a 1 con 100 GET','/api/vehiculos'),
+    manual('P16','React consulta ventas','/api/ventas'), manual('P17','evento RabbitMQ persistente','/api/notificaciones',notificationHeader),
+    manual('P18','venta rechazada no emite evento','/api/notificaciones',notificationHeader), manual('P19','consumidor detenido mensaje Ready'),
+    manual('P20','consumidor reiniciado procesa pendiente','/api/notificaciones',notificationHeader), manual('P21','JavaFX muestra notificación','/api/notificaciones',notificationHeader),
+    manual('P22','reentrega no duplica aviso','/api/notificaciones',notificationHeader), manual('P23','balanceo 3 a 1 con 100 GET','/api/vehiculos'),
     manual('P24','caída de instancia Java','/api/vehiculos'), manual('P25','recuperación y JWT stateless','/api/vehiculos'),
     manual('P26','monitor y rutas','/nginx-ping'), manual('P27','cadena comercial completa','/api/ventas'),
     manual('P28','auditoría sin secretos ni resultados ficticios')
@@ -92,8 +94,8 @@ const folders = [
     manual('E55','WinForms maneja 401 y 403'), manual('E56','WinForms backend no disponible'), manual('E57','WinForms valida entradas'),
     manual('E58','PWA cierre de sesión'), manual('E59','PWA doble submit idempotente'), manual('E60','PWA fallo incierto'),
     manual('E61','React maneja 401 y 403'), manual('E62','React vacío y fallo de conectividad'),
-    req('E63','payload evento sin secretos','GET','/api/notificaciones',{expected:[200]}), manual('E64','caída y recuperación RabbitMQ'),
-    req('E65','notificaciones autorizadas','GET','/api/notificaciones',{expected:[200,401,403]}), manual('E66','JavaFX recupera sondeo','/api/notificaciones')
+    req('E63','consulta de eventos sin exponer secretos','GET','/api/notificaciones',{headers:notificationHeader,expected:[200]}), manual('E64','caída y recuperación RabbitMQ'),
+    req('E65','consulta de notificaciones con clave de servicio','GET','/api/notificaciones',{headers:notificationHeader,expected:[200]}), manual('E66','JavaFX recupera sondeo','/api/notificaciones',notificationHeader)
   ]},
   { name: 'NGINX e integración', item: [
     manual('E67','nginx -t'), req('E68','nginx-ping con backend caído','GET','/nginx-ping',{auth:false,expected:[200]}),
@@ -110,7 +112,7 @@ const collection = {
 };
 
 const envValues = [
-  ['baseUrl','http://127.0.0.1:8090'], ['oauthBasic',''], ['operadorUser',''], ['operadorPassword',''],
+  ['baseUrl','http://127.0.0.1:8090'], ['oauthBasic',''], ['notificationKey',''], ['operadorUser',''], ['operadorPassword',''],
   ['consultaUser',''], ['consultaPassword',''], ['accessToken',''], ['operatorToken',''], ['consultaToken',''], ['alteredToken','token.alterado.firma'],
   ['expiredToken',''], ['vehiculoId',''], ['vehiculoIdAlt',''], ['compradorId',''], ['ventaId',''], ['idempotencyKey','ape04-idempotencia-001'],
   ['qaSuffix',''], ['qaPlate',''], ['qaChassis',''], ['qaDocument',''], ['qaEmail','']

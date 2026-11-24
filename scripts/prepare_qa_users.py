@@ -44,6 +44,7 @@ source = root / "postman" / "APE04_LOCAL_SANITIZADO.postman_environment.json"
 environment = json.loads(source.read_text(encoding="utf-8"))
 values = {item["key"]: item for item in environment["values"]}
 values["oauthBasic"]["value"] = oauth_basic
+values["notificationKey"]["value"] = local_secrets["NOTIFICACIONES_KEY"]
 values["operadorUser"]["value"] = "qa-operador"
 values["operadorPassword"]["value"] = accounts["qa-operador"][1]
 values["consultaUser"]["value"] = "qa-consulta"
